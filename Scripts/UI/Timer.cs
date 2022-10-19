@@ -7,9 +7,12 @@ public class Timer : MonoBehaviour
 {
 
     public Text gameTimeUI;
-    public float setTime = 90;
+    public float setTime = 150;
     int min;
     float sec;
+
+    public GameObject gameoverPanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,8 @@ public class Timer : MonoBehaviour
         {
             // UI 텍스트를 0초로 고정시킴.
             gameTimeUI.text = "남은 시간 : 0초";
+
+            gameoverPanel.SetActive(true);
         }
     }
 }

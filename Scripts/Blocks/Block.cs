@@ -7,10 +7,13 @@ public class Block : MonoBehaviour
     private int count = 0;
     Renderer blockColor;
     public Material softBlock;
+
+    public GameObject gameManager;
     // Start is called before the first frame update
     void Start()
     {
         blockColor = gameObject.GetComponent<Renderer>();
+        gameManager = GameObject.FindWithTag("game");
     }
 
     // Update is called once per frame
@@ -21,7 +24,7 @@ public class Block : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.tag == "Ball")
+        if(col.gameObject.CompareTag("Ball") || col.gameObject.CompareTag("SecondBall") || col.gameObject.CompareTag("BigBall"))
         {
             count++;
             if(count == 1)
@@ -31,9 +34,16 @@ public class Block : MonoBehaviour
             if(count == 2)
             {
                 Destroy(gameObject,0.2f);
+                gameManager.GetComponent<GameManger>().blockNum--;
+
             }
         }
 
+        if (col.gameObject.tag == "SuperBall")
+        {
+            Destroy(gameObject, 0.2f);
+            gameManager.GetComponent<GameManger>().blockNum--;
+        }
     }
 
 

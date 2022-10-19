@@ -26,6 +26,7 @@ public class GameManger : MonoBehaviour
     void Start()
     {
         hp = 3;
+        blockNum = 16;
         Time.timeScale = 0f;
         _gameover = GameObject.FindWithTag("DeadZone");
         timer = GetComponent<Timer>();
@@ -34,7 +35,6 @@ public class GameManger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Win();
         ballmake();
 
         if (Input.GetKey(KeyCode.Space))
@@ -54,10 +54,8 @@ public class GameManger : MonoBehaviour
         {
             hpImage1.SetActive(false);
         }
-
+        Win();
         Over();
-        
-        
     }
 
     void Win()

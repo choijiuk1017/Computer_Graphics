@@ -21,11 +21,22 @@ public class DeadZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Ball"))
+        if (other.gameObject.CompareTag("Ball") || other.gameObject.CompareTag("BigBall"))
         {
-            Destroy(ball);
+            Destroy(other.gameObject);
             gameManager.GetComponent<GameManger>().hp -= 1;
             isball = false;
+        }
+
+        if(other.gameObject.CompareTag("SuperBall"))
+        {
+            Destroy(other.gameObject);
+            isball = false;
+        }
+
+        if(other.gameObject.CompareTag("SecondBall"))
+        {
+            Destroy(other.gameObject);
         }
     }
 }
