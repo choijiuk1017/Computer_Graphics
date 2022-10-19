@@ -27,24 +27,5 @@ public class Player : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision col)
-    {
-        if(col.gameObject.tag == "Ball")
-        {
-            Vector3 reflect = col.transform.position - tr.position;
 
-            float result = 0.0f;
-
-            if(reflect.x > 0)
-            {
-                result = 1.0f;
-            }
-            else if (reflect.x > 0)
-            {
-                result = -1.0f;
-            }
-
-            col.rigidbody.AddForce(new Vector3(150.0f * result, 0.0f, 50.0f));
-        }
-    }
 }
