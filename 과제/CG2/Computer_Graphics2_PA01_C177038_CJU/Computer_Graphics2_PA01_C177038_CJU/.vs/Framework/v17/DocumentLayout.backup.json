@@ -63,8 +63,7 @@
               "ViewState": "AgIAACABAAAAAAAAAAAAAEABAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-19T10:57:11.103Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -112,9 +111,9 @@
               "Title": "pointLightShader.hlsl",
               "DocumentMoniker": "C:\\Users\\user\\OneDrive\\\uC0AC\uC9C4\\\uBC14\uD0D5 \uD654\uBA74\\CG\\\uACFC\uC81C\\CG2\\Computer_Graphics2_PA01_C177038_CJU\\Computer_Graphics2_PA01_C177038_CJU\\Framework\\data\\pointLightShader.hlsl",
               "RelativeDocumentMoniker": "Framework\\data\\pointLightShader.hlsl",
-              "ToolTip": "C:\\Users\\user\\OneDrive\\\uC0AC\uC9C4\\\uBC14\uD0D5 \uD654\uBA74\\CG\\\uACFC\uC81C\\CG2\\Computer_Graphics2_PA01_C177038_CJU\\Computer_Graphics2_PA01_C177038_CJU\\Framework\\data\\pointLightShader.hlsl*",
-              "RelativeToolTip": "Framework\\data\\pointLightShader.hlsl*",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAAAIAAAAAdAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\user\\OneDrive\\\uC0AC\uC9C4\\\uBC14\uD0D5 \uD654\uBA74\\CG\\\uACFC\uC81C\\CG2\\Computer_Graphics2_PA01_C177038_CJU\\Computer_Graphics2_PA01_C177038_CJU\\Framework\\data\\pointLightShader.hlsl",
+              "RelativeToolTip": "Framework\\data\\pointLightShader.hlsl",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAH4AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
               "WhenOpened": "2025-10-20T03:27:57.328Z",
               "EditorCaption": ""

@@ -126,13 +126,6 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     // Ambient base
     color = ambientColor;
     
-    float ambientFactor = 0.5f;
-    
-    color += diffuseColorPoint[0] * ambientFactor;
-    color += diffuseColorPoint[1] * ambientFactor;
-    color += diffuseColorPoint[2] * ambientFactor;
-    color += diffuseColorPoint[3] * ambientFactor;
-    
     specular = float4(0, 0, 0, 0);
 
     lightDir = normalize(-lightDirection);
