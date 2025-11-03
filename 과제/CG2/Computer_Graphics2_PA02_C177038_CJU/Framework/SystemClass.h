@@ -4,6 +4,7 @@
 
 class InputClass;
 class GraphicsClass;
+class SoundClass;
 
 class SystemClass
 {
@@ -30,6 +31,8 @@ private:
 
 	InputClass* m_Input = nullptr;
 	GraphicsClass* m_Graphics = nullptr;
+
+	SoundClass* m_Sound = nullptr;
 };
 
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

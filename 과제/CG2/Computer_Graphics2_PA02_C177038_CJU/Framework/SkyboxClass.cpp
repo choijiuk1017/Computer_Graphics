@@ -20,7 +20,7 @@ SkyboxClass::~SkyboxClass()
 
 bool SkyboxClass::Initialize(ID3D11Device* device, const wchar_t* cubeMapFile)
 {
-	CreateSphere(device, 10, 10);
+	CreateSphere(device, 5, 5);
 
 	D3DCompileFromFile(L"./data/shaders.hlsl", 0, 0, "SKYMAP_VS", "vs_5_0", 0, 0, &SKYMAP_VS_Buffer, 0);
 	D3DCompileFromFile(L"./data/shaders.hlsl", 0, 0, "SKYMAP_PS", "ps_5_0", 0, 0, &SKYMAP_PS_Buffer, 0);

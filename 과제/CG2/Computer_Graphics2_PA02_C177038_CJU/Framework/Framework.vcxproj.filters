@@ -56,6 +56,9 @@
     <ClInclude Include="SkyboxClass.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="SoundClass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BumpMapShaderClass.cpp">
@@ -95,6 +98,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SkyboxClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
