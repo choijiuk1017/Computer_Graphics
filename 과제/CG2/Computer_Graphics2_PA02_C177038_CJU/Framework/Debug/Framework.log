@@ -1,0 +1,5 @@
+﻿  GraphicsClass.cpp
+C:\Users\user\OneDrive\사진\바탕 화면\Computer_Graphics2_PA02_C177038_CJU\Framework\GraphicsClass.cpp(49,13): warning C4316: 'SkyboxClass': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  SkyboxClass.cpp
+  코드를 생성하고 있습니다...
+  Framework.vcxproj -> C:\Users\user\OneDrive\사진\바탕 화면\Computer_Graphics2_PA02_C177038_CJU\Debug\Framework.exe
