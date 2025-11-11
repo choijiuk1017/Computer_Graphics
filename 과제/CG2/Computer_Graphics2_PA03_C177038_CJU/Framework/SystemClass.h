@@ -33,6 +33,17 @@ private:
 	GraphicsClass* m_Graphics = nullptr;
 
 	SoundClass* m_Sound = nullptr;
+
+	int currentAmbientMode = 1;
+	int currentDiffuseMode = 1;
+	int currentSpecularMode = 1;
+
+	bool prevAmbientKeyDown = false;
+	bool prevDiffuseKeyDown = false;
+
+
+	bool prevKeyDown = false;
+
 };
 
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

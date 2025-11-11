@@ -3,6 +3,8 @@
 /////////////
 // GLOBALS //
 /////////////
+
+#include <Vector>
 const bool FULL_SCREEN = false;
 const bool VSYNC_ENABLED = true;
 const float SCREEN_DEPTH = 1000.0f;
@@ -35,7 +37,20 @@ public:
 		return m_Camera;
 	}
 
+
+	void SetAmbient(int);
+	void SetDiffuse(int);
+	void SetSpecular(int);
+
+	void IncreaseIntensity();
+	void DecreaseIntensity();
+
 private:
+
+
+	float intensity;
+
+
 	D3DClass* m_Direct3D = nullptr;
 	CameraClass* m_Camera = nullptr;
 	MultiTextureModelClass* m_MultiModel = nullptr;
@@ -44,8 +59,10 @@ private:
 
 	LightShaderClass* m_LightShader;
 	LightClass* m_Light1, * m_Light2, * m_Light3, * m_Light4;
-	ModelClass* m_Model = nullptr;
+
+	XMFLOAT4 baseColor[4];
 
 	SkyboxClass* m_Skybox = nullptr;
 
+	std::vector<ModelClass*> m_Models;
 };

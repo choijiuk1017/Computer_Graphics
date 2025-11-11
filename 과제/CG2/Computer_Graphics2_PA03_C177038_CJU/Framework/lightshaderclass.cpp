@@ -55,14 +55,14 @@ bool LightShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount
 	XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix,
 	ID3D11ShaderResourceView* texture,
 	XMFLOAT3 lightDirection, XMFLOAT4 ambientColor, XMFLOAT4 diffuseColor,
-	XMFLOAT3 cameraPosition, XMFLOAT4 specularColor, float specularPower, XMFLOAT4 pointDiffuse[], XMFLOAT4 pointPosition[])
+	XMFLOAT3 cameraPosition, XMFLOAT4 specularColor, float specularPower, XMFLOAT4 pointDiffuse[], XMFLOAT4 pointSpecular[], XMFLOAT4 pointPosition[])
 {
 	bool result;
 
 
 	// Set the shader parameters that it will use for rendering.
 	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, texture,
-		lightDirection, ambientColor, diffuseColor, cameraPosition, specularColor, specularPower, pointDiffuse, pointPosition);
+		lightDirection, ambientColor, diffuseColor, cameraPosition, specularColor, specularPower, pointDiffuse, pointSpecular, pointPosition);
 	if (!result)
 	{
 		return false;
@@ -388,7 +388,8 @@ void LightShaderClass::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND h
 bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix,
 	ID3D11ShaderResourceView* texture,
-	XMFLOAT3 lightDirection, XMFLOAT4 ambientColor, XMFLOAT4 diffuseColor, XMFLOAT3 cameraPosition, XMFLOAT4 specularColor, float specularPower, XMFLOAT4 pointDiffuse[], XMFLOAT4 pointPosition[])
+	XMFLOAT3 lightDirection, XMFLOAT4 ambientColor, XMFLOAT4 diffuseColor, XMFLOAT3 cameraPosition, XMFLOAT4 specularColor, float specularPower,
+	XMFLOAT4 pointDiffuse[], XMFLOAT4 pointSpecular[], XMFLOAT4 pointPosition[])
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -520,6 +521,12 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	dataPtr5->diffuseColorPoint[1] = pointDiffuse[1];
 	dataPtr5->diffuseColorPoint[2] = pointDiffuse[2];
 	dataPtr5->diffuseColorPoint[3] = pointDiffuse[3];
+
+
+	dataPtr5->specularColorPoint[0] = pointSpecular[0];
+	dataPtr5->specularColorPoint[1] = pointSpecular[1];
+	dataPtr5->specularColorPoint[2] = pointSpecular[2];
+	dataPtr5->specularColorPoint[3] = pointSpecular[3];
 
 	// Unlock the constant buffer.
 	deviceContext->Unmap(m_lightColorBuffer, 0);

@@ -39,6 +39,13 @@ public:
 	bool IsMoveRightPressed();
 	bool IsMoveLeftPressed();
 
+
+	bool Is5KeyPressed();
+	bool Is6KeyPressed();
+	bool Is7KeyPressed();
+	bool Is8KeyPressed();
+	bool Is9KeyPressed();
+
 	void GetMouseLocation(int&, int&);
 
 	float GetMouseDeltaX();
@@ -61,6 +68,15 @@ private:
 	int m_screenHeight = 0;
 	int m_mouseX = 0;
 	int m_mouseY = 0;
+
+	bool m_key5State = false;      
+	bool m_prev5Pressed = false;  
+
+	bool m_key6State = false;
+	bool m_prev6Pressed = false;
+
+	bool m_key7State = false;
+	bool m_prev7Pressed = false;
 };
 
 

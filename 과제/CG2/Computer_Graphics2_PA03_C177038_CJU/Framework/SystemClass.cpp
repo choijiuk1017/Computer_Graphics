@@ -152,10 +152,56 @@ bool SystemClass::Frame()
 		return false;
 	}
 
-	if(m_Input->IsMoveForwardPressed() == true) m_Graphics->GetCamera()->MoveForward(0.5f);
-	if(m_Input->IsMoveDownPressed() == true) m_Graphics->GetCamera()->MoveForward(-0.5f);
-	if(m_Input->IsMoveRightPressed() == true) m_Graphics->GetCamera()->MoveRight(0.5f);
-	if(m_Input->IsMoveLeftPressed()== true) m_Graphics->GetCamera()->MoveRight(-0.5f);
+	if (m_Input->IsMoveForwardPressed() == true) m_Graphics->GetCamera()->MoveForward(0.5f);
+	if (m_Input->IsMoveDownPressed() == true) m_Graphics->GetCamera()->MoveForward(-0.5f);
+	if (m_Input->IsMoveRightPressed() == true) m_Graphics->GetCamera()->MoveRight(0.5f);
+	if (m_Input->IsMoveLeftPressed() == true) m_Graphics->GetCamera()->MoveRight(-0.5f);
+
+	if (m_Input->Is5KeyPressed() == true)
+	{
+		if (!prevAmbientKeyDown)
+		{
+			currentAmbientMode = (currentAmbientMode == 0) ? 1 : 0;
+			m_Graphics->SetAmbient(currentAmbientMode);
+			prevAmbientKeyDown = true;
+		}
+	}
+	else
+	{
+		prevAmbientKeyDown = false;
+	}
+
+
+	if (m_Input->Is6KeyPressed() == true)
+	{
+		if (!prevDiffuseKeyDown)
+		{
+			currentDiffuseMode = (currentDiffuseMode == 0) ? 1 : 0;
+			m_Graphics->SetDiffuse(currentDiffuseMode);
+			prevDiffuseKeyDown = true;
+		}
+	}
+	else
+	{
+		prevDiffuseKeyDown = false;
+	}
+
+	if (m_Input->Is7KeyPressed() == true)
+	{
+		if (!prevKeyDown)
+		{
+			currentSpecularMode = (currentSpecularMode == 0) ? 1 : 0;
+			m_Graphics->SetSpecular(currentSpecularMode);
+			prevKeyDown = true;
+		}
+	}
+	else
+	{
+		prevKeyDown = false;
+	}
+
+	if (m_Input->Is8KeyPressed() == true) m_Graphics->IncreaseIntensity();
+	if (m_Input->Is9KeyPressed() == true) m_Graphics->DecreaseIntensity();
 
 	POINT currentPos;
 	GetCursorPos(&currentPos);
