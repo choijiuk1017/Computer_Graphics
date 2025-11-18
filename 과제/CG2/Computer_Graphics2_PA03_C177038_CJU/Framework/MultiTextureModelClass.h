@@ -54,6 +54,9 @@ public:
 	int GetIndexCount();
 	ID3D11ShaderResourceView** GetTextureArray();
 
+	XMMATRIX GetWorldMatrix() const;
+
+
 private:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
@@ -80,4 +83,6 @@ private:
 	int m_indexCount = 0;
 	ModelType* m_model = nullptr;
 	TextureArrayClass* m_TextureArray = nullptr;
+
+	XMMATRIX m_worldMatrix;
 };

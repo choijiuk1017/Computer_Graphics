@@ -25,9 +25,10 @@ bool SystemClass::Initialize()
 	// 윈도우 창 가로, 세로 넓이 변수 초기화
 	int screenWidth = 0;
 	int screenHeight = 0;
-
+	bool result;
 	// 윈도우 생성 초기화
 	InitializeWindows(screenWidth, screenHeight);
+
 
 	// m_Input 객체 생성. 이 클래스는 추후 사용자의 키보드 입력 처리에 사용됩니다.
 	m_Input = new InputClass;
@@ -68,6 +69,38 @@ bool SystemClass::Initialize()
 		return false;
 	}
 
+	m_Fps = new FpsClass;
+	if (!m_Fps)
+	{
+		return false;
+	}
+
+	// Initialize the fps object.
+	m_Fps->Initialize();
+	// Create the cpu object.
+	m_Cpu = new CpuClass;
+	if (!m_Cpu)
+	{
+		return false;
+	}
+
+	// Initialize the cpu object.
+	m_Cpu->Initialize();
+	// Create the timer object.
+	m_Timer = new TimerClass;
+	if (!m_Timer)
+	{
+		return false;
+	}
+
+	// Initialize the timer object.
+	result = m_Timer->Initialize();
+	if (!result)
+	{
+		MessageBox(m_hwnd, L"Could not initialize the Timer object.", L"Error", MB_OK);
+		return false;
+	}
+
 	return true;
 }
 
@@ -95,6 +128,28 @@ void SystemClass::Shutdown()
 		m_Sound->Shutdown();
 		delete m_Sound;
 		m_Sound = 0;
+	}
+
+	// Release the timer object.
+	if (m_Timer)
+	{
+		delete m_Timer;
+		m_Timer = 0;
+	}
+
+	// Release the cpu object.
+	if (m_Cpu)
+	{
+		m_Cpu->Shutdown();
+		delete m_Cpu;
+		m_Cpu = 0;
+	}
+
+	// Release the fps object.
+	if (m_Fps)
+	{
+		delete m_Fps;
+		m_Fps = 0;
 	}
 
 	// Window 종료 처리
@@ -143,6 +198,10 @@ void SystemClass::Run()
 bool SystemClass::Frame()
 {
 	int mouseX, mouseY;
+
+	m_Timer->Frame();
+	m_Fps->Frame();
+	m_Cpu->Frame();
 
 	ShowCursor(FALSE);
 
@@ -203,6 +262,59 @@ bool SystemClass::Frame()
 	if (m_Input->Is8KeyPressed() == true) m_Graphics->IncreaseIntensity();
 	if (m_Input->Is9KeyPressed() == true) m_Graphics->DecreaseIntensity();
 
+	if (m_Input->IsQKeyPressed() == true)
+	{
+		if (!prevQkeyDown)
+		{
+			m_Graphics->m_ShowTitle = !m_Graphics->m_ShowTitle;
+			prevQkeyDown = true;
+		}
+	}
+	else
+	{
+		prevQkeyDown = false;
+	}
+
+	if (m_Input->Is1KeyPressed() == true)
+	{
+		if (!prev1keyDown)
+		{
+			m_Graphics->SetAniNum(1);
+			prev1keyDown = true;
+		}
+	}
+	else
+	{
+		prev1keyDown = false;
+	}
+
+	if (m_Input->Is2KeyPressed() == true)
+	{
+		if (!prev1keyDown)
+		{
+			m_Graphics->SetAniNum(2);
+			prev2keyDown = true;
+		}
+	}
+	else
+	{
+		prev2keyDown = false;
+	}
+
+	if (m_Input->Is3KeyPressed() == true)
+	{
+		if (!prev1keyDown)
+		{
+			m_Graphics->SetAniNum(3);
+			prev3keyDown = true;
+		}
+	}
+	else
+	{
+		prev3keyDown = false;
+	}
+
+
 	POINT currentPos;
 	GetCursorPos(&currentPos);
 
@@ -222,10 +334,10 @@ bool SystemClass::Frame()
 	m_Graphics->GetCamera()->Rotate(deltaX * sensitivity, deltaY * sensitivity);
 
 	// 마우스를 다시 중앙으로 되돌림
-	SetCursorPos(center.x, center.y);
+	//SetCursorPos(center.x, center.y);
 
 	// 그래픽 객체에 대한 프레임 처리를 수행합니다.
-	if (!m_Graphics->Frame())
+	if (!m_Graphics->Frame(m_Fps->GetFps(), m_Cpu->GetCpuPercentage()))
 	{
 		return false;
 	}

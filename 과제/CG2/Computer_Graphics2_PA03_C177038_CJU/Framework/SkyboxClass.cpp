@@ -22,8 +22,8 @@ bool SkyboxClass::Initialize(ID3D11Device* device, const wchar_t* cubeMapFile)
 {
 	CreateSphere(device, 5, 5);
 
-	D3DCompileFromFile(L"./data/shaders.hlsl", 0, 0, "SKYMAP_VS", "vs_5_0", 0, 0, &SKYMAP_VS_Buffer, 0);
-	D3DCompileFromFile(L"./data/shaders.hlsl", 0, 0, "SKYMAP_PS", "ps_5_0", 0, 0, &SKYMAP_PS_Buffer, 0);
+	D3DCompileFromFile(L"./data/skymapshaders.hlsl", 0, 0, "SKYMAP_VS", "vs_5_0", 0, 0, &SKYMAP_VS_Buffer, 0);
+	D3DCompileFromFile(L"./data/skymapshaders.hlsl", 0, 0, "SKYMAP_PS", "ps_5_0", 0, 0, &SKYMAP_PS_Buffer, 0);
 
 	device->CreateVertexShader(SKYMAP_VS_Buffer->GetBufferPointer(), SKYMAP_VS_Buffer->GetBufferSize(), NULL, &SKYMAP_VS);
 	device->CreatePixelShader(SKYMAP_PS_Buffer->GetBufferPointer(), SKYMAP_PS_Buffer->GetBufferSize(), NULL, &SKYMAP_PS);
@@ -72,7 +72,7 @@ void SkyboxClass::Render(ID3D11DeviceContext* context, const XMMATRIX& view, con
 	XMMATRIX Translation = XMMatrixTranslation(camPosition.x, camPosition.y, camPosition.z);
 	sphereWorld = Scale * Translation;
 
-	UINT stride = sizeof(Vertex);
+	UINT stride = sizeof(SkyboxVertex);
 	UINT offset = 0;
 
 	context->IASetVertexBuffers(0, 1, &sphereVertBuffer, &stride, &offset);
@@ -119,7 +119,7 @@ void SkyboxClass::CreateSphere(ID3D11Device* device, int LatLines, int LongLines
 	float sphereYaw = 0.0f;
 	float spherePitch = 0.0f;
 
-	std::vector<Vertex> vertices(NumSphereVertices);
+	std::vector<SkyboxVertex> vertices(NumSphereVertices);
 
 	XMVECTOR currVertPos = XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 
@@ -152,7 +152,7 @@ void SkyboxClass::CreateSphere(ID3D11Device* device, int LatLines, int LongLines
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	vertexBufferDesc.ByteWidth = sizeof(Vertex) * NumSphereVertices;
+	vertexBufferDesc.ByteWidth = sizeof(SkyboxVertex) * NumSphereVertices;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	vertexBufferDesc.CPUAccessFlags = 0;
 	vertexBufferDesc.MiscFlags = 0;

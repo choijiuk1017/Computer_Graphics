@@ -68,6 +68,87 @@
     <ClInclude Include="textureclass.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="bitmapclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cpuclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="fontclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="fontshaderclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="fpsclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="textclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="timerclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="textureshaderclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FBXModelClass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseModel.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelStructure.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MYUTIL.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RMModel.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RMShader.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RMTexture.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinModel.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BumpMapShaderClass.cpp">
@@ -89,9 +170,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="LightClass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiTextureModelClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
@@ -121,15 +199,105 @@
     <ClCompile Include="textureclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="cpuclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="fontclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="fontshaderclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="fpsclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="textclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="timerclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="textureshaderclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FBXModelClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTextureModelClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="bitmapclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseModel.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MYUTIL.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RMModel.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RMShader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RMTexture.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinModel.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\bumpmapShader.hlsl">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="data\shaders.hlsl">
+    <None Include="data\pointLightShader.hlsl">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="data\pointLightShader.hlsl">
+    <None Include="data\fontShader.hlsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\maintextureShader.hlsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\skymapshaders.hlsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\skinShader.hlsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\textureShader.hlsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\lightShader.hlsl">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
@@ -153,6 +321,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="data\alpha3.dds">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="data\aaa.dds">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

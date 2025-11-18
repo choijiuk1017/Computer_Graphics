@@ -5,7 +5,7 @@
 
 using namespace DirectX;
 
-struct Vertex
+struct SkyboxVertex
 {
 	XMFLOAT3 pos;
 	XMFLOAT2 texCoord;

@@ -3,8 +3,11 @@
 /////////////
 // GLOBALS //
 /////////////
-
 #include <Vector>
+#include "RMModel.h"
+#include "ModelLoader.h"
+
+
 const bool FULL_SCREEN = false;
 const bool VSYNC_ENABLED = true;
 const float SCREEN_DEPTH = 1000.0f;
@@ -14,11 +17,16 @@ const float SCREEN_NEAR = 0.1f;
 class D3DClass;
 class CameraClass;
 class MultiTextureModelClass;
+class ModelClass;
+class FBXModelClass;
 class BumpMapShaderClass;
 class LightClass;
 class SkyboxClass;
 class LightShaderClass;
-class ModelClass;
+class BitmapClass;
+class TextureShaderClass;
+class TextClass;
+
 
 class GraphicsClass
 {
@@ -29,7 +37,7 @@ public:
 
 	bool Initialize(int, int, HWND);
 	void Shutdown();
-	bool Frame();
+	bool Frame(int, int);
 	bool Render();
 
 	CameraClass* GetCamera()
@@ -45,10 +53,16 @@ public:
 	void IncreaseIntensity();
 	void DecreaseIntensity();
 
+	bool m_ShowTitle = true;
+
+	void SetAniNum(int);
+
 private:
 
-
+	float m_AnimTime = 0.0f;
 	float intensity;
+
+	int animationNum = 1;
 
 
 	D3DClass* m_Direct3D = nullptr;
@@ -65,4 +79,17 @@ private:
 	SkyboxClass* m_Skybox = nullptr;
 
 	std::vector<ModelClass*> m_Models;
+
+	TextureShaderClass* m_TextureShader = nullptr;
+	BitmapClass* m_Title = nullptr;
+
+	std::vector<TextClass*> m_Texts;
+
+	FBXModelClass* m_FBXModel = nullptr;
+
+	ModelLoader* m_modelLoader;
+	SkinModel* m_skinModel;
+
+
+
 };

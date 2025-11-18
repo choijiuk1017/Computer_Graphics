@@ -518,3 +518,8 @@ void  MultiTextureModelClass::CalculateNormal(VectorType tangent, VectorType bin
 	normal.y = normal.y / length;
 	normal.z = normal.z / length;
 }
+
+XMMATRIX MultiTextureModelClass::GetWorldMatrix() const
+{
+	return m_worldMatrix;
+}

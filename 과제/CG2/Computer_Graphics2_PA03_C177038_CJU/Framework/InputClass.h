@@ -39,12 +39,16 @@ public:
 	bool IsMoveRightPressed();
 	bool IsMoveLeftPressed();
 
-
+	bool Is1KeyPressed();
+	bool Is2KeyPressed();
+	bool Is3KeyPressed();
 	bool Is5KeyPressed();
 	bool Is6KeyPressed();
 	bool Is7KeyPressed();
 	bool Is8KeyPressed();
 	bool Is9KeyPressed();
+
+	bool IsQKeyPressed();
 
 	void GetMouseLocation(int&, int&);
 

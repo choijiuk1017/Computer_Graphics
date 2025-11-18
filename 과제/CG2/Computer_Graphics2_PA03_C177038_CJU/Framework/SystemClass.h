@@ -1,6 +1,9 @@
 #pragma once
 
 #include "CameraClass.h"
+#include "fpsclass.h"
+#include "cpuclass.h"
+#include "timerclass.h"
 
 class InputClass;
 class GraphicsClass;
@@ -34,15 +37,23 @@ private:
 
 	SoundClass* m_Sound = nullptr;
 
+	FpsClass* m_Fps;
+	CpuClass* m_Cpu;
+	TimerClass* m_Timer;
+
 	int currentAmbientMode = 1;
 	int currentDiffuseMode = 1;
 	int currentSpecularMode = 1;
 
 	bool prevAmbientKeyDown = false;
 	bool prevDiffuseKeyDown = false;
-
-
 	bool prevKeyDown = false;
+
+	bool prevQkeyDown = false;
+
+	bool prev1keyDown = false;
+	bool prev2keyDown = false;
+	bool prev3keyDown = false;
 
 };
 

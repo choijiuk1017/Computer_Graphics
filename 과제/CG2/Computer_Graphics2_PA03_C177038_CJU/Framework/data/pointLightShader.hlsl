@@ -146,39 +146,39 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 
 
     // Diffuse
-    lightIntensity1 = saturate(dot(input.normal, normalize(input.lightPos1))) * att1;
-    lightIntensity2 = saturate(dot(input.normal, normalize(input.lightPos2))) * att2;
-    lightIntensity3 = saturate(dot(input.normal, normalize(input.lightPos3))) * att3;
-    lightIntensity4 = saturate(dot(input.normal, normalize(input.lightPos4))) * att4;
+    //lightIntensity1 = saturate(dot(input.normal, normalize(input.lightPos1))) * att1;
+    //lightIntensity2 = saturate(dot(input.normal, normalize(input.lightPos2))) * att2;
+    //lightIntensity3 = saturate(dot(input.normal, normalize(input.lightPos3))) * att3;
+    //lightIntensity4 = saturate(dot(input.normal, normalize(input.lightPos4))) * att4;
     
-    //lightIntensity1 = saturate(dot(input.normal, normalize(input.lightPos1)));
-    //lightIntensity2 = saturate(dot(input.normal, normalize(input.lightPos2)));
-    //lightIntensity3 = saturate(dot(input.normal, normalize(input.lightPos3)));
-    //lightIntensity4 = saturate(dot(input.normal, normalize(input.lightPos4)));
+    lightIntensity1 = saturate(dot(input.normal, normalize(input.lightPos1)));
+    lightIntensity2 = saturate(dot(input.normal, normalize(input.lightPos2)));
+    lightIntensity3 = saturate(dot(input.normal, normalize(input.lightPos3)));
+    lightIntensity4 = saturate(dot(input.normal, normalize(input.lightPos4)));
 
     color1 = diffuseColorPoint[0] * lightIntensity1;
     color2 = diffuseColorPoint[1] * lightIntensity2;
     color3 = diffuseColorPoint[2] * lightIntensity3;
     color4 = diffuseColorPoint[3] * lightIntensity4;
 
-    spec1 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos1), input.normal)), input.viewDirection)), specularPower / 2)
-         * specularColorPoint[0] * att1;
-    spec2 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos2), input.normal)), input.viewDirection)), specularPower / 2)
-        * specularColorPoint[1] * att2;
-    spec3 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos3), input.normal)), input.viewDirection)), specularPower / 2)
-        * specularColorPoint[2] * att3;
-    spec4 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos4), input.normal)), input.viewDirection)), specularPower / 2)
-         * specularColorPoint[3] * att4;
-    
-    
     //spec1 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos1), input.normal)), input.viewDirection)), specularPower / 2)
-    //     * specularColorPoint[0];
+    //     * specularColorPoint[0] * att1;
     //spec2 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos2), input.normal)), input.viewDirection)), specularPower / 2)
-    //    * specularColorPoint[1];
+    //    * specularColorPoint[1] * att2;
     //spec3 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos3), input.normal)), input.viewDirection)), specularPower / 2)
-    //    * specularColorPoint[2];
+    //    * specularColorPoint[2] * att3;
     //spec4 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos4), input.normal)), input.viewDirection)), specularPower / 2)
-    //     * specularColorPoint[3];
+    //     * specularColorPoint[3] * att4;
+    
+    
+    spec1 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos1), input.normal)), input.viewDirection)), specularPower / 2)
+         * specularColorPoint[0];
+    spec2 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos2), input.normal)), input.viewDirection)), specularPower / 2)
+        * specularColorPoint[1];
+    spec3 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos3), input.normal)), input.viewDirection)), specularPower / 2)
+        * specularColorPoint[2];
+    spec4 = pow(saturate(dot(normalize(reflect(-normalize(input.lightPos4), input.normal)), input.viewDirection)), specularPower / 2)
+         * specularColorPoint[3];
 
     //textureColor = shaderTexture.Sample(SampleType, input.tex);
     //color += saturate(color1 + color2 + color3 + color4);
