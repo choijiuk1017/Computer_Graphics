@@ -55,6 +55,8 @@ private:
 	bool prev2keyDown = false;
 	bool prev3keyDown = false;
 
+	bool prevMouseLeftClicked = false;
+
 };
 
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

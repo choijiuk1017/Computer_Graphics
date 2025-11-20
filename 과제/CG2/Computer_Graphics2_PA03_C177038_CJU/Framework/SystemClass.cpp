@@ -314,6 +314,18 @@ bool SystemClass::Frame()
 		prev3keyDown = false;
 	}
 
+	if (m_Input->IsMouseLeftClicked() == true && m_Graphics->m_ShowTitle == false)
+	{
+		if (!prevMouseLeftClicked)
+		{
+			m_Graphics->ShootBullet();
+			prevMouseLeftClicked = true;
+		}
+	}
+	else
+	{
+		prevMouseLeftClicked = false;
+	}
 
 	POINT currentPos;
 	GetCursorPos(&currentPos);
@@ -334,7 +346,7 @@ bool SystemClass::Frame()
 	m_Graphics->GetCamera()->Rotate(deltaX * sensitivity, deltaY * sensitivity);
 
 	// 마우스를 다시 중앙으로 되돌림
-	//SetCursorPos(center.x, center.y);
+	SetCursorPos(center.x, center.y);
 
 	// 그래픽 객체에 대한 프레임 처리를 수행합니다.
 	if (!m_Graphics->Frame(m_Fps->GetFps(), m_Cpu->GetCpuPercentage()))

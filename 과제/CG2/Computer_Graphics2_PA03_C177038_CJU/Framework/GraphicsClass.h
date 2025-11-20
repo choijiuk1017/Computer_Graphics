@@ -30,6 +30,7 @@ class TextClass;
 
 class GraphicsClass
 {
+
 public:
 	GraphicsClass();
 	GraphicsClass(const GraphicsClass&);
@@ -57,6 +58,46 @@ public:
 
 	void SetAniNum(int);
 
+	void ShootBullet();
+
+
+private:
+	void CalculateAABB(
+		const std::vector<XMFLOAT3>& localBox,
+		const XMMATRIX& world,
+		XMVECTOR& outMin,
+		XMVECTOR& outMax)
+	{
+		XMFLOAT3 minV(FLT_MAX, FLT_MAX, FLT_MAX);
+		XMFLOAT3 maxV(-FLT_MAX, -FLT_MAX, -FLT_MAX);
+
+		for (int i = 0; i < 8; ++i)
+		{
+			XMVECTOR v = XMVectorSet(localBox[i].x, localBox[i].y, localBox[i].z, 1.0f);
+			v = XMVector3TransformCoord(v, world);
+
+			minV.x = std::min(minV.x, XMVectorGetX(v));
+			minV.y = std::min(minV.y, XMVectorGetY(v));
+			minV.z = std::min(minV.z, XMVectorGetZ(v));
+
+			maxV.x = std::max(maxV.x, XMVectorGetX(v));
+			maxV.y = std::max(maxV.y, XMVectorGetY(v));
+			maxV.z = std::max(maxV.z, XMVectorGetZ(v));
+		}
+
+		outMin = XMLoadFloat3(&minV);
+		outMax = XMLoadFloat3(&maxV);
+	}
+
+	bool AABB_Intersect(XMVECTOR minA, XMVECTOR maxA, XMVECTOR minB, XMVECTOR maxB)
+	{
+		if (XMVectorGetX(maxA) < XMVectorGetX(minB) || XMVectorGetX(minA) > XMVectorGetX(maxB)) return false;
+		if (XMVectorGetY(maxA) < XMVectorGetY(minB) || XMVectorGetY(minA) > XMVectorGetY(maxB)) return false;
+		if (XMVectorGetZ(maxA) < XMVectorGetZ(minB) || XMVectorGetZ(minA) > XMVectorGetZ(maxB)) return false;
+
+		return true;
+	}
+
 private:
 
 	float m_AnimTime = 0.0f;
@@ -80,6 +121,14 @@ private:
 
 	std::vector<ModelClass*> m_Models;
 
+	ModelClass* m_Bullet = nullptr;
+	XMMATRIX m_BulletWorld = XMMatrixIdentity();
+	XMFLOAT3 m_BulletPos;
+	XMFLOAT3 m_BulletDir;
+
+	bool m_bulletFlying = false;
+
+	
 	TextureShaderClass* m_TextureShader = nullptr;
 	BitmapClass* m_Title = nullptr;
 
@@ -89,7 +138,4 @@ private:
 
 	ModelLoader* m_modelLoader;
 	SkinModel* m_skinModel;
-
-
-
 };

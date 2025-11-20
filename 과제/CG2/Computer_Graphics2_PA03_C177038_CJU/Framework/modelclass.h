@@ -17,7 +17,7 @@ using namespace DirectX;
 // MY CLASS INCLUDES //
 ///////////////////////
 #include "textureclass.h"
-
+#include <vector>
 #include <fstream>
 using namespace std;
 
@@ -66,6 +66,15 @@ public:
 
 	XMMATRIX GetWorldMatrix() const;
 
+	void SetWorldMatrix(XMMATRIX world) { m_worldMatrix = world; }
+
+	std::vector<XMFLOAT3>& GetBoundingBox() { return m_boundingBox; }
+
+	void GetWorldAABB(XMFLOAT3& outMin, XMFLOAT3& outMax);
+
+	void SetEnabled(bool b) { m_Enabled = b; }
+	bool IsEnabled() const { return m_Enabled; }
+
 private:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
@@ -79,6 +88,7 @@ private:
 	bool LoadTextModel(const WCHAR* filename);
 	bool LoadDataStructures(const WCHAR*, int, int, int, int);
 
+
 private:
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount, m_textureCount, m_normalCount, m_faceCount;
@@ -87,6 +97,12 @@ private:
 	XMMATRIX m_worldMatrix;
 
 	ModelType* m_model;
+
+	XMFLOAT3 m_minBounds;
+	XMFLOAT3 m_maxBounds;
+	std::vector<XMFLOAT3> m_boundingBox;
+
+	bool m_Enabled = true;
 };
 
 #endif

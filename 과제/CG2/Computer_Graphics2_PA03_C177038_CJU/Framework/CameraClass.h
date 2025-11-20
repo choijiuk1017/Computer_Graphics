@@ -37,6 +37,9 @@ public:
 	void MoveRight(float speed);
 	void Rotate(float yawDelta, float pitchDelta);
 
+	XMVECTOR GetForwardVector() const;
+	XMVECTOR GetPositionVector() const;
+
 private:
 	XMFLOAT3 m_position;
 	XMFLOAT3 m_rotation;

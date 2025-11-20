@@ -2,7 +2,9 @@
 // Filename: modelclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "modelclass.h"
-
+#include <algorithm>
+#undef min
+#undef max
 
 ModelClass::ModelClass()
 {
@@ -52,6 +54,8 @@ bool ModelClass::Initialize(ID3D11Device* device, const WCHAR* modelFilename, co
 		return false;
 	}
 
+
+
 	return true;
 }
 
@@ -73,6 +77,8 @@ void ModelClass::Shutdown()
 
 void ModelClass::Render(ID3D11DeviceContext* deviceContext)
 {
+	if (!m_Enabled) return;
+
 	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	RenderBuffers(deviceContext);
 
@@ -164,7 +170,32 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	{
 		return false;
 	}
+	m_minBounds = XMFLOAT3(FLT_MAX, FLT_MAX, FLT_MAX);
+	m_maxBounds = XMFLOAT3(-FLT_MAX, -FLT_MAX, -FLT_MAX);
 
+	for (int i = 0; i < m_vertexCount; i++)
+	{
+		XMFLOAT3 p = vertices[i].position;
+
+		m_minBounds.x = std::min(m_minBounds.x, p.x);
+		m_minBounds.y = std::min(m_minBounds.y, p.y);
+		m_minBounds.z = std::min(m_minBounds.z, p.z);
+
+		m_maxBounds.x = std::max(m_maxBounds.x, p.x);
+		m_maxBounds.y = std::max(m_maxBounds.y, p.y);
+		m_maxBounds.z = std::max(m_maxBounds.z, p.z);
+	}
+
+	// AABB 8개 점 다시 생성
+	m_boundingBox.clear();
+	m_boundingBox.push_back({ m_minBounds.x, m_minBounds.y, m_minBounds.z });
+	m_boundingBox.push_back({ m_maxBounds.x, m_minBounds.y, m_minBounds.z });
+	m_boundingBox.push_back({ m_minBounds.x, m_maxBounds.y, m_minBounds.z });
+	m_boundingBox.push_back({ m_maxBounds.x, m_maxBounds.y, m_minBounds.z });
+	m_boundingBox.push_back({ m_minBounds.x, m_minBounds.y, m_maxBounds.z });
+	m_boundingBox.push_back({ m_maxBounds.x, m_minBounds.y, m_maxBounds.z });
+	m_boundingBox.push_back({ m_minBounds.x, m_maxBounds.y, m_maxBounds.z });
+	m_boundingBox.push_back({ m_maxBounds.x, m_maxBounds.y, m_maxBounds.z });
 	// Release the arrays now that the vertex and index buffers have been created and loaded.
 	delete [] vertices;
 	vertices = 0;
@@ -594,6 +625,34 @@ bool ModelClass::LoadDataStructures(const WCHAR* filename, int vertexCount, int 
 		m_model[i * 3 + 2].nz = normals[nIndex].z;
 	}
 
+
+	XMFLOAT3 minV(FLT_MAX, FLT_MAX, FLT_MAX);
+	XMFLOAT3 maxV(-FLT_MAX, -FLT_MAX, -FLT_MAX);
+
+	for (int i = 0; i < vertexCount; i++)
+	{
+		minV.x = min(minV.x, vertices[i].x);
+		minV.y = min(minV.y, vertices[i].y);
+		minV.z = min(minV.z, vertices[i].z);
+
+		maxV.x = max(maxV.x, vertices[i].x);
+		maxV.y = max(maxV.y, vertices[i].y);
+		maxV.z = max(maxV.z, vertices[i].z);
+	}
+
+	m_minBounds = minV;
+	m_maxBounds = maxV;
+
+	// 로컬 AABB 8점 생성
+	m_boundingBox.clear();
+	m_boundingBox.push_back({ minV.x, minV.y, minV.z });
+	m_boundingBox.push_back({ maxV.x, minV.y, minV.z });
+	m_boundingBox.push_back({ minV.x, maxV.y, minV.z });
+	m_boundingBox.push_back({ maxV.x, maxV.y, minV.z });
+	m_boundingBox.push_back({ minV.x, minV.y, maxV.z });
+	m_boundingBox.push_back({ maxV.x, minV.y, maxV.z });
+	m_boundingBox.push_back({ minV.x, maxV.y, maxV.z });
+	m_boundingBox.push_back({ maxV.x, maxV.y, maxV.z });
 	//// Close the output file.
 	//fout.close();
 
@@ -628,4 +687,30 @@ bool ModelClass::LoadDataStructures(const WCHAR* filename, int vertexCount, int 
 XMMATRIX ModelClass::GetWorldMatrix() const
 {
 	return m_worldMatrix;
+}
+
+void ModelClass::GetWorldAABB(XMFLOAT3& outMin, XMFLOAT3& outMax)
+{
+	outMin = XMFLOAT3(FLT_MAX, FLT_MAX, FLT_MAX);
+	outMax = XMFLOAT3(-FLT_MAX, -FLT_MAX, -FLT_MAX);
+
+	XMMATRIX world = m_worldMatrix;
+
+	for (int i = 0; i < 8; i++)
+	{
+		XMFLOAT3 p = m_boundingBox[i];
+		XMVECTOR v = XMLoadFloat3(&p);
+		v = XMVector3TransformCoord(v, world);
+
+		XMFLOAT3 wp;
+		XMStoreFloat3(&wp, v);
+
+		outMin.x = std::min(outMin.x, wp.x);
+		outMin.y = std::min(outMin.y, wp.y);
+		outMin.z = std::min(outMin.z, wp.z);
+
+		outMax.x = std::max(outMax.x, wp.x);
+		outMax.y = std::max(outMax.y, wp.y);
+		outMax.z = std::max(outMax.z, wp.z);
+	}
 }

@@ -50,6 +50,8 @@ public:
 
 	bool IsQKeyPressed();
 
+	bool IsMouseLeftClicked();
+
 	void GetMouseLocation(int&, int&);
 
 	float GetMouseDeltaX();
