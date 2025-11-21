@@ -9,6 +9,8 @@ SoundClass::SoundClass()
 	m_DirectSound = 0;
 	m_primaryBuffer = 0;
 	m_secondaryBuffer1 = 0;
+
+	m_gunShotBuffer = 0;
 }
 
 
@@ -35,14 +37,13 @@ bool SoundClass::Initialize(HWND hwnd)
 	}
 
 	// Load a wave audio file onto a secondary buffer.
-	result = LoadWaveFile("./data/HaHa.wav", &m_secondaryBuffer1);
+	result = LoadWaveFile("./data/War.wav", &m_secondaryBuffer1);
 	if (!result)
 	{
 		return false;
 	}
 
-	// Play the wave file now that it has been loaded.
-	result = PlayWaveFile();
+	result = LoadWaveFile("./data/Gun.wav", &m_gunShotBuffer);
 	if (!result)
 	{
 		return false;
@@ -56,6 +57,8 @@ void SoundClass::Shutdown()
 {
 	// Release the secondary buffer.
 	ShutdownWaveFile(&m_secondaryBuffer1);
+
+	ShutdownWaveFile(&m_gunShotBuffer);
 
 	// Shutdown the Direct Sound API.
 	ShutdownDirectSound();
@@ -333,8 +336,8 @@ bool SoundClass::PlayWaveFile()
 
 	// Set volume of the buffer to 100%.
 	//result = m_secondaryBuffer1->SetVolume(DSBVOLUME_MAX);
-	//result = m_secondaryBuffer1->SetVolume(-3000);
-	result = m_secondaryBuffer1->SetVolume(-1000);
+	result = m_secondaryBuffer1->SetVolume(-3000);
+	//result = m_secondaryBuffer1->SetVolume(-1000);
 	if (FAILED(result))
 	{
 		return false;
@@ -346,6 +349,28 @@ bool SoundClass::PlayWaveFile()
 	{
 		return false;
 	}
+
+	return true;
+}
+
+bool SoundClass::PlayGunShot()
+{
+	HRESULT result;
+
+	// 시작 위치
+	result = m_gunShotBuffer->SetCurrentPosition(0);
+	if (FAILED(result))
+		return false;
+
+	// 볼륨 설정 (원하는 값 넣기)
+	result = m_gunShotBuffer->SetVolume(-1000);
+	if (FAILED(result))
+		return false;
+
+	// ★ 루프 없이 재생
+	result = m_gunShotBuffer->Play(0, 0, 0);
+	if (FAILED(result))
+		return false;
 
 	return true;
 }

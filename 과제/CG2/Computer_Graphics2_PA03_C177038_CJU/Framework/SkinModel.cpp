@@ -26,8 +26,13 @@ void SkinModel::Release()
 	BaseModel::Release();
 }
 
+void SkinModel::Render(ID3D11DeviceContext* dc)
+{
 
-void SkinModel::Render(ID3D11DeviceContext * dc)
+}
+
+void SkinModel::Render(ID3D11DeviceContext * dc, XMFLOAT3 lightDirection, XMFLOAT4 ambientColor, XMFLOAT4 diffuseColor,
+	XMFLOAT3 cameraPosition, XMFLOAT4 specularColor, float specularPower, XMFLOAT4 pointDiffuse[], XMFLOAT4 pointSpecular[], XMFLOAT4 pointPosition[])
 {
 	//메쉬 정보가 없으면 리턴
 	if (_meshList.empty()) 	return;
@@ -72,6 +77,16 @@ void SkinModel::Render(ID3D11DeviceContext * dc)
 			}
 			RM_SHADER.SetShaderParameters(dc, _tmModel);
 
+			RM_SHADER.SetLightDirectional(
+				dc,
+				ambientColor,
+				diffuseColor,
+				lightDirection,
+				specularPower,
+				specularColor
+			);
+			RM_SHADER.SetLightPositions(dc, pointPosition);
+			RM_SHADER.SetLightColors(dc, pointDiffuse, pointSpecular);
 			//렌더
 			GetShader()->IndexRender(dc, mesh->count, mesh->start);
 		}

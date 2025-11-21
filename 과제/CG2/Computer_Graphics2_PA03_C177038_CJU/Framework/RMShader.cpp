@@ -41,6 +41,20 @@ HRESULT RMShader::Init(ID3D11Device * device)
 		return E_FAIL;
 	}
 
+	matrixBufferDesc.ByteWidth = sizeof(LightBuffer);
+	if (FAILED(device->CreateBuffer(&matrixBufferDesc, NULL, &_lightBuffer)))
+		return E_FAIL;
+
+	// ===== LightPositionBuffer (b5) =====
+	matrixBufferDesc.ByteWidth = sizeof(LightPositionBuffer);
+	if (FAILED(device->CreateBuffer(&matrixBufferDesc, NULL, &_lightPosBuffer)))
+		return E_FAIL;
+
+	// ===== LightColorBuffer (b6) =====
+	matrixBufferDesc.ByteWidth = sizeof(LightColorBuffer);
+	if (FAILED(device->CreateBuffer(&matrixBufferDesc, NULL, &_lightColorBuffer)))
+		return E_FAIL;
+
 	return S_OK;
 }
 
@@ -107,7 +121,7 @@ bool RMShader::SetShaderParameters(ID3D11DeviceContext * dc, XMMATRIX matWorld)
 	return true;
 }
 
-bool RMShader::SetShaderParameters(ID3D11DeviceContext * dc, XMMATRIX matView, XMMATRIX matProj)
+bool RMShader::SetShaderParameters(ID3D11DeviceContext * dc, XMMATRIX matView, XMMATRIX matProj, XMFLOAT3 camPos)
 {
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	unsigned int bufferNumber =0;
@@ -126,6 +140,8 @@ bool RMShader::SetShaderParameters(ID3D11DeviceContext * dc, XMMATRIX matView, X
 	//행렬 정보 넘기기
 	dataPtr->matView = XMMatrixTranspose(matView);
 	dataPtr->matProj = XMMatrixTranspose(matProj);
+	dataPtr->cameraPosition = camPos;
+	dataPtr->padding0 = 0.0f;
 
 	dc->Unmap(matBuff, 0);
 
@@ -161,6 +177,79 @@ bool RMShader::SetShaderParameters(ID3D11DeviceContext * dc, XMFLOAT4 color)
 	return true;
 }
 
+bool RMShader::SetLightDirectional(
+	ID3D11DeviceContext* dc,
+	const XMFLOAT4& ambient,
+	const XMFLOAT4& diffuse,
+	const XMFLOAT3& direction,
+	float specPower,
+	const XMFLOAT4& specColor)
+{
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+
+	if (FAILED(dc->Map(_lightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource)))
+		return false;
+
+	LightBuffer* dataPtr = (LightBuffer*)mappedResource.pData;
+
+	dataPtr->ambientColor = ambient;
+	dataPtr->diffuseColor = diffuse;
+	dataPtr->lightDirection = direction;
+	dataPtr->specularPower = specPower;
+	dataPtr->specularColor = specColor;
+
+	dc->Unmap(_lightBuffer, 0);
+
+	// PS로 전달
+	dc->PSSetConstantBuffers(4, 1, &_lightBuffer);
+
+	return true;
+}
+
+
+bool RMShader::SetLightPositions(ID3D11DeviceContext* dc, const XMFLOAT4 pos[4])
+{
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+
+	if (FAILED(dc->Map(_lightPosBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource)))
+		return false;
+
+	LightPositionBuffer* dataPtr = (LightPositionBuffer*)mappedResource.pData;
+
+	for (int i = 0; i < 4; i++)
+		dataPtr->lightPosition[i] = pos[i];
+
+	dc->Unmap(_lightPosBuffer, 0);
+
+	dc->PSSetConstantBuffers(5, 1, &_lightPosBuffer);
+
+	return true;
+}
+
+bool RMShader::SetLightColors(
+	ID3D11DeviceContext* dc,
+	const XMFLOAT4 diffuse[4],
+	const XMFLOAT4 spec[4])
+{
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+
+	if (FAILED(dc->Map(_lightColorBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource)))
+		return false;
+
+	LightColorBuffer* dataPtr = (LightColorBuffer*)mappedResource.pData;
+
+	for (int i = 0; i < 4; i++)
+	{
+		dataPtr->diffuseColorPoint[i] = diffuse[i];
+		dataPtr->specularColorPoint[i] = spec[i];
+	}
+
+	dc->Unmap(_lightColorBuffer, 0);
+
+	dc->PSSetConstantBuffers(6, 1, &_lightColorBuffer);
+
+	return true;
+}
 
 Shader* RMShader::loadResource(wstring fileName, void * param)
 {

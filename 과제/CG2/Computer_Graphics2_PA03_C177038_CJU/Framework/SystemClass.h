@@ -56,6 +56,7 @@ private:
 	bool prev3keyDown = false;
 
 	bool prevMouseLeftClicked = false;
+	bool prevMouseRightClicked = false;
 
 };
 

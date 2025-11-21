@@ -68,6 +68,7 @@ bool SystemClass::Initialize()
 		MessageBox(m_hwnd, L"Could not initialize Direct Sound.", L"Error", MB_OK);
 		return false;
 	}
+	m_Sound->PlayWaveFile();
 
 	m_Fps = new FpsClass;
 	if (!m_Fps)
@@ -314,7 +315,7 @@ bool SystemClass::Frame()
 		prev3keyDown = false;
 	}
 
-	if (m_Input->IsMouseLeftClicked() == true && m_Graphics->m_ShowTitle == false)
+	if (m_Input->IsMouseLeftClicked() == true && m_Graphics->m_ShowTitle == false && m_Graphics->m_IsAiming == true)
 	{
 		if (!prevMouseLeftClicked)
 		{
@@ -325,6 +326,20 @@ bool SystemClass::Frame()
 	else
 	{
 		prevMouseLeftClicked = false;
+	}
+
+	if (m_Input->IsMouseRightClicked() == true && m_Graphics->m_ShowTitle == false)
+	{
+		if (!prevMouseRightClicked)
+		{
+			m_Graphics->Aiming();
+			prevMouseRightClicked = true;
+		}
+	}
+	else
+	{
+		m_Graphics->UnAiming();
+		prevMouseRightClicked = false;
 	}
 
 	POINT currentPos;

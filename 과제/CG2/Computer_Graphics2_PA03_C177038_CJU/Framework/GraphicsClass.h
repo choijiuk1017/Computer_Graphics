@@ -26,6 +26,7 @@ class LightShaderClass;
 class BitmapClass;
 class TextureShaderClass;
 class TextClass;
+class SoundClass;
 
 
 class GraphicsClass
@@ -56,9 +57,15 @@ public:
 
 	bool m_ShowTitle = true;
 
+	bool m_IsAiming = false;
+
 	void SetAniNum(int);
 
 	void ShootBullet();
+
+	void Aiming();
+
+	void UnAiming();
 
 
 private:
@@ -127,10 +134,14 @@ private:
 	XMFLOAT3 m_BulletDir;
 
 	bool m_bulletFlying = false;
+	int bulletNum = 30;
 
+	float m_BulletLifeTime = 0.0f;
+	const float BULLET_MAX_LIFETIME = 2.0f;
 	
 	TextureShaderClass* m_TextureShader = nullptr;
 	BitmapClass* m_Title = nullptr;
+	BitmapClass* m_Scope = nullptr;
 
 	std::vector<TextClass*> m_Texts;
 
@@ -138,4 +149,6 @@ private:
 
 	ModelLoader* m_modelLoader;
 	SkinModel* m_skinModel;
+
+	SoundClass* m_Sound;
 };

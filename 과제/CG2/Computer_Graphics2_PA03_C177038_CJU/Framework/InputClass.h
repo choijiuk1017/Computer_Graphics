@@ -51,6 +51,7 @@ public:
 	bool IsQKeyPressed();
 
 	bool IsMouseLeftClicked();
+	bool IsMouseRightClicked();
 
 	void GetMouseLocation(int&, int&);
 

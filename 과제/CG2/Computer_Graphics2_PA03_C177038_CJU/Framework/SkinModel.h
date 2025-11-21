@@ -12,7 +12,7 @@ public:
 	virtual ~SkinModel();
 
 	void					Release();
-	void					Render(ID3D11DeviceContext* dc);
+	void					Render(ID3D11DeviceContext* dc, XMFLOAT3 lightDirection, XMFLOAT4 ambientColor, XMFLOAT4 diffuseColor,XMFLOAT3 cameraPosition, XMFLOAT4 specularColor, float specularPower, XMFLOAT4 pointDiffuse[], XMFLOAT4 pointSpecular[], XMFLOAT4 pointPosition[]);
 	
 	//Animation Function
 	void					PlayAni(int idx);
@@ -34,6 +34,8 @@ public:
 	Animation GetAnimation(int num) { return _aniList[num]; }
 
 	XMMATRIX GetWorldMatrix() const;
+
+	virtual void Render(ID3D11DeviceContext* dc) override;
 protected:
 	void UpdateNodeTM();
 

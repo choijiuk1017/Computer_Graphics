@@ -43,7 +43,7 @@ public:
 	bool SetObjectNum(int, ID3D11DeviceContext*);
 	bool SetPolygonNum(int, ID3D11DeviceContext*);
 	bool SetScreenResolution(int, int, ID3D11DeviceContext*);
-
+	bool SetBulletNum(int, ID3D11DeviceContext*);
 private:
 	bool InitializeSentence(SentenceType**, int, ID3D11Device*);
 	bool UpdateSentence(SentenceType*, const char*, int, int, float, float, float, ID3D11DeviceContext*);

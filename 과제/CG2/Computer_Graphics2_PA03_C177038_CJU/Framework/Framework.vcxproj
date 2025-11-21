@@ -241,6 +241,7 @@
     <Image Include="data\alpha.dds" />
     <Image Include="data\alpha2.dds" />
     <Image Include="data\alpha3.dds" />
+    <Image Include="data\bullet.dds" />
     <Image Include="data\dirt.dds" />
     <Image Include="data\dirt.normal.dds" />
     <Image Include="data\skymap.dds" />
