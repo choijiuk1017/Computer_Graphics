@@ -177,7 +177,7 @@
               "RelativeDocumentMoniker": "Framework\\GraphicsClass.cpp",
               "ToolTip": "C:\\Users\\user\\OneDrive\\\uC0AC\uC9C4\\\uBC14\uD0D5 \uD654\uBA74\\CG\\\uACFC\uC81C\\CG2\\Computer_Graphics2_PA03_C177038_CJU\\Framework\\GraphicsClass.cpp",
               "RelativeToolTip": "Framework\\GraphicsClass.cpp",
-              "ViewState": "AgIAAOEAAAAAAAAAAAAuwO0AAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAuwMIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-11-03T16:45:26.733Z",
               "IsPinned": true,
@@ -310,8 +310,7 @@
               "RelativeToolTip": "Framework\\data\\lightShader.hlsl",
               "ViewState": "AgIAAGkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
-              "WhenOpened": "2025-11-18T09:38:08.407Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-18T09:38:08.407Z"
             },
             {
               "$type": "Document",
