@@ -244,6 +244,7 @@
     <Image Include="data\bullet.dds" />
     <Image Include="data\dirt.dds" />
     <Image Include="data\dirt.normal.dds" />
+    <Image Include="data\FlatBump.dds" />
     <Image Include="data\skymap.dds" />
     <Image Include="data\stone.dds" />
   </ItemGroup>

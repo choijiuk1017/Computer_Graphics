@@ -213,23 +213,23 @@ float4 BumpMapPixelShader(PixelInputType input) : SV_TARGET
     float att3 = saturate(1.0f / (1.0f + 10.0f * dist3 + 0.07f * dist3 * dist3));
     float att4 = saturate(1.0f / (1.0f + 10.0f * dist4 + 0.07f * dist4 * dist4));
     
-    lightIntensity1 = saturate(dot(input.normal, SafeNormalize(input.lightPos1)));
-    lightIntensity2 = saturate(dot(input.normal, SafeNormalize(input.lightPos2)));
-    lightIntensity3 = saturate(dot(input.normal, SafeNormalize(input.lightPos3)));
-    lightIntensity4 = saturate(dot(input.normal, SafeNormalize(input.lightPos4)));
+    lightIntensity1 = saturate(dot(bumpNormal, SafeNormalize(input.lightPos1)));
+    lightIntensity2 = saturate(dot(bumpNormal, SafeNormalize(input.lightPos2)));
+    lightIntensity3 = saturate(dot(bumpNormal, SafeNormalize(input.lightPos3)));
+    lightIntensity4 = saturate(dot(bumpNormal, SafeNormalize(input.lightPos4)));
 
     color1 = diffuseColorPoint[0] * lightIntensity1 * att1;
     color2 = diffuseColorPoint[1] * lightIntensity2 * att2;
     color3 = diffuseColorPoint[2] * lightIntensity3 * att3;
     color4 = diffuseColorPoint[3] * lightIntensity4 * att4;
 
-    spec1 = pow(saturate(dot(SafeNormalize(reflect(-SafeNormalize(input.lightPos1), input.normal)), input.viewDirection)), specularPower / 2)
+    spec1 = pow(saturate(dot(SafeNormalize(reflect(-SafeNormalize(input.lightPos1), bumpNormal)), input.viewDirection)), specularPower / 2)
          * specularColorPoint[0] * att1;
-    spec2 = pow(saturate(dot(SafeNormalize(reflect(-SafeNormalize(input.lightPos2), input.normal)), input.viewDirection)), specularPower / 2)
+    spec2 = pow(saturate(dot(SafeNormalize(reflect(-SafeNormalize(input.lightPos2), bumpNormal)), input.viewDirection)), specularPower / 2)
         * specularColorPoint[1] * att2;
-    spec3 = pow(saturate(dot(SafeNormalize(reflect(-SafeNormalize(input.lightPos3), input.normal)), input.viewDirection)), specularPower / 2)
+    spec3 = pow(saturate(dot(SafeNormalize(reflect(-SafeNormalize(input.lightPos3), bumpNormal)), input.viewDirection)), specularPower / 2)
         * specularColorPoint[2] * att3;
-    spec4 = pow(saturate(dot(SafeNormalize(reflect(-SafeNormalize(input.lightPos4), input.normal)), input.viewDirection)), specularPower / 2)
+    spec4 = pow(saturate(dot(SafeNormalize(reflect(-SafeNormalize(input.lightPos4), bumpNormal)), input.viewDirection)), specularPower / 2)
          * specularColorPoint[3] * att4;
     
     color += saturate(color1 + color2 + color3 + color4);

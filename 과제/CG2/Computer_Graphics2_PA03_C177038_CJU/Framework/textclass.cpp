@@ -415,7 +415,7 @@ bool TextClass::SetFPS(int fps, ID3D11DeviceContext* deviceContext)
 	}
 
 	// Update the sentence vertex buffer with the new string information.
-	result = UpdateSentence(m_sentence1, fpsString, 700, -20, red, green, blue, deviceContext);
+	result = UpdateSentence(m_sentence1, fpsString, 10, -20, red, green, blue, deviceContext);
 	if (!result)
 	{
 		return false;
@@ -440,7 +440,7 @@ bool TextClass::SetCPU(int cpu, ID3D11DeviceContext* deviceContext)
 	strcat_s(cpuString, "%");
 
 	// Update the sentence vertex buffer with the new string information.
-	result = UpdateSentence(m_sentence1, cpuString, 700, 0, 0.0f, 1.0f, 0.0f, deviceContext);
+	result = UpdateSentence(m_sentence1, cpuString, 10, 0, 0.0f, 1.0f, 0.0f, deviceContext);
 	if (!result)
 	{
 		return false;
@@ -462,7 +462,7 @@ bool TextClass::SetObjectNum(int object, ID3D11DeviceContext* deviceContext)
 	strcpy_s(objString, "Object = ");
 	strcat_s(objString, tempString);
 
-	result = UpdateSentence(m_sentence1, objString, 700, 20, 0.0f, 1.0f, 0.0f, deviceContext);
+	result = UpdateSentence(m_sentence1, objString, 10, 20, 0.0f, 1.0f, 0.0f, deviceContext);
 	if (!result)
 	{
 		return false;
@@ -484,7 +484,7 @@ bool TextClass::SetPolygonNum(int polygon, ID3D11DeviceContext* deviceContext)
 	strcpy_s(polyString, "Polygon = ");
 	strcat_s(polyString, tempString);
 
-	result = UpdateSentence(m_sentence1, polyString, 700, 40, 0.0f, 1.0f, 0.0f, deviceContext);
+	result = UpdateSentence(m_sentence1, polyString, 10, 40, 0.0f, 1.0f, 0.0f, deviceContext);
 	if (!result)
 	{
 		return false;
@@ -510,7 +510,7 @@ bool TextClass::SetScreenResolution(int width, int height, ID3D11DeviceContext* 
 	strcat_s(resolutionString, heightString);
 
 	// 텍스트 업데이트 (예시 위치: 오른쪽 위)
-	result = UpdateSentence(m_sentence1, resolutionString, 675, 60, 0.0f, 1.0f, 0.0f, deviceContext);
+	result = UpdateSentence(m_sentence1, resolutionString, 10, 60, 0.0f, 1.0f, 0.0f, deviceContext);
 	if (!result)
 	{
 		return false;
@@ -535,7 +535,7 @@ bool TextClass::SetBulletNum(int num, ID3D11DeviceContext* deviceContext)
 	strcat_s(bulletNumString, numString);
 
 
-	result = UpdateSentence(m_sentence1, bulletNumString, 10, 60, 1.0f, 1.0f, 1.0f, deviceContext);
+	result = UpdateSentence(m_sentence1, bulletNumString, 10, 80, 1.0f, 1.0f, 1.0f, deviceContext);
 	if (!result)
 	{
 		return false;

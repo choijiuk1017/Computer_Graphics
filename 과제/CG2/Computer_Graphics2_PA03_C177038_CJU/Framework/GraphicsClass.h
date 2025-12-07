@@ -116,6 +116,7 @@ private:
 	D3DClass* m_Direct3D = nullptr;
 	CameraClass* m_Camera = nullptr;
 	MultiTextureModelClass* m_MultiModel = nullptr;
+	MultiTextureModelClass* m_MultiModel2 = nullptr;
 	BumpMapShaderClass* m_BumpMapShader = nullptr;
 	LightClass* m_Light = nullptr;
 
